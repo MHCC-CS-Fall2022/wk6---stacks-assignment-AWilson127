@@ -1,0 +1,44 @@
+/*******************************************************************************
+* Filename:   stack1.template
+* Summary:    This program that prints out the array version of the stacks
+*             from bottom to top and compares two stacks to see if they are the 
+*             same.
+* Author:      Alen Wilson
+* Date:        11/8/2022
+*******************************************************************************/
+
+#include <cassert>  // Provides assert
+
+namespace main_savitch_7A
+{
+    template <class Item>
+    const typename stack<Item>::size_type stack<Item>::CAPACITY;
+    
+    // pushes a number into the stack
+    template <class Item>
+    void stack<Item>::push(const Item& entry)
+    // Library facilities used: cassert
+    {
+        assert(size( ) < CAPACITY);
+        data[used] = entry;
+        ++used;
+    }
+    
+    // takes a number out of a stack
+    template <class Item>
+    void stack<Item>::pop( )
+    // Library facilities used: cassert
+    {
+        assert(!empty( ));
+        --used;
+    }
+
+    //sees what the top number is on a stack
+    template <class Item>
+    Item stack<Item>::top( ) const
+    // Library facilities used: cassert
+    {
+        assert(!empty( ));
+        return data[used-1];
+    }
+}

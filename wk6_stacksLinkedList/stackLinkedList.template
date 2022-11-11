@@ -1,0 +1,63 @@
+/*******************************************************************************
+* Filename:   stack2.template
+* Summary:    This program that prints out the array version of the stacks
+*             from bottom to top and compares two stacks to see if they are the 
+*             same.
+* Author:     Alen Wilson
+* Date:       11/8/2022
+*******************************************************************************/
+
+#include <cassert>  // Provides assert
+#include "node2.h"  // Node template class
+
+namespace main_savitch_7B
+{
+    template <class Item>
+    stack<Item>::stack(const stack<Item>& source) 
+    // Library facilities used: node2.h
+    {
+        main_savitch_6B::node<Item> *tail_ptr; // Needed for argument of list_copy
+
+        list_copy(source.top_ptr, top_ptr, tail_ptr);
+    }
+
+    // pushes a number into the stack
+    template <class Item>
+    void stack<Item>::push(const Item& entry) 
+    // Library facilities used: node2.h
+    {
+        list_head_insert(top_ptr, entry);
+    }
+
+    // takes a number out of a stack
+    template <class Item>
+    void stack<Item>::pop( )
+    // Library facilities used: cassert, node2.h
+    {
+        assert(!empty( ));
+        list_head_remove(top_ptr);
+    }
+    
+    // makes one stack be the same as the other
+    template <class Item>
+    void stack<Item>::operator =(const stack<Item>& source) 
+    // Library facilities used: node2.h
+    {
+        main_savitch_6B::node<Item> *tail_ptr; // Needed for argument of list_copy
+
+        if (this == &source) // Handle self-assignment
+            return;
+
+        list_clear(top_ptr);
+        list_copy(source.top_ptr, top_ptr, tail_ptr);
+    }
+
+    //sees what the top number is on a stack
+    template <class Item>
+    Item stack<Item>::top( ) const 
+    // Library facilities used: cassert
+    {
+        assert(!empty( ));
+        return top_ptr->data( );
+    }
+}
